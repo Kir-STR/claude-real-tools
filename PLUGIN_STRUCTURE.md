@@ -63,7 +63,10 @@ The marketplace configuration enables distribution through the Claude Code marke
   "plugins": [
     {
       "name": "real-supervisor",
-      "source": ".",
+      "source": {
+        "source": "github",
+        "repo": "Kir-STR/claude-real-tools"
+      },
       "description": "...",
       "version": "1.0.0",
       ...

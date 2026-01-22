@@ -30,7 +30,10 @@ A Claude Code plugin marketplace is a catalog that distributes extensions to tea
   "plugins": [
     {
       "name": "real-supervisor",
-      "source": ".",
+      "source": {
+        "source": "github",
+        "repo": "Kir-STR/claude-real-tools"
+      },
       "description": "Orchestrates complex, multi-step projects...",
       "version": "1.0.0",
       ...
@@ -156,22 +159,41 @@ export BITBUCKET_TOKEN=xxxxxxxxxxxxxxxxxxxxxxxx
 
 ## Plugin Source Configuration
 
-The marketplace entry uses `"source": "."` which means:
+For GitHub-based marketplaces, the source field should explicitly reference the repository:
+
+```json
+"source": {
+  "source": "github",
+  "repo": "Kir-STR/claude-real-tools"
+}
+```
+
+This configuration:
+- Works when marketplace is added from GitHub
 - Plugin files are in the **same repository** as the marketplace
 - Entire repository root is copied as the plugin
-- Works because `.claude-plugin/plugin.json` exists at the root
+- Validates correctly with Claude Code's schema
 
 ### Alternative Source Types
 
-If you want to distribute from a different repository:
+If you want to distribute from a different repository or use local paths:
 
-**GitHub Source:**
+**Local Path (for local testing only):**
+```json
+{
+  "name": "real-supervisor",
+  "source": "."
+}
+```
+Note: This only works when using `/plugin marketplace add ./path/to/repo`
+
+**GitHub Source (for remote distribution):**
 ```json
 {
   "name": "real-supervisor",
   "source": {
     "source": "github",
-    "repo": "Kir-STR/claude-real-supervisor-plugin"
+    "repo": "Kir-STR/claude-real-tools"
   }
 }
 ```
@@ -182,7 +204,7 @@ If you want to distribute from a different repository:
   "name": "real-supervisor",
   "source": {
     "source": "url",
-    "url": "https://github.com/Kir-STR/claude-real-supervisor-plugin.git"
+    "url": "https://github.com/Kir-STR/claude-real-tools.git"
   }
 }
 ```
