@@ -21,6 +21,5 @@
     "checkpoints"
   ],
   "skills": "./skills/",
-  "commands": "./commands/",
-  "hooks": "./hooks/hooks.json"
+  "commands": "./commands/"
 }
