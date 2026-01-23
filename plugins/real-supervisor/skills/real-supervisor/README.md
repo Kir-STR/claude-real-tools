@@ -136,6 +136,16 @@ All session state is stored in `.supervisor/`:
 }
 ```
 
+### Output Naming Convention
+
+Output filenames are derived from your PRD filename by stripping the path and extension:
+
+- `api_requirements.md` → `draft_api.*`, `final_api.*`
+- `system_design.md` → `draft_system_design.*`, `final_system_design.*`
+- `docs/user_guide.md` → `draft_user_guide.*`, `final_user_guide.*`
+
+The file extension (`.js`, `.py`, `.md`, etc.) is determined by the deliverable type specified in your PRD.
+
 ## Resumption
 
 If a session is interrupted, simply re-run the command:
