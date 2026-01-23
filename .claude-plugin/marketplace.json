@@ -4,14 +4,14 @@
     "name": "Kir-STR"
   },
   "metadata": {
-    "description": "Real Tools marketplace - orchestrate complex projects through structured, resumable workflows with the Real Supervisor plugin",
+    "description": "Real Tools is a collection of plugins for organizing complex projects using structured, repeatable workflows.",
     "version": "1.0.0"
   },
   "plugins": [
     {
       "name": "real-supervisor",
       "source": "./plugins/real-supervisor",
-      "description": "A powerful Claude Code plugin that orchestrates complex, multi-step projects through a structured, resumable workflow with specialized worker agents.",
+      "description": "Powerful Claude Code plugins that manage complex, multi-stage projects using a structured, repeatable workflow.",
       "version": "1.0.0",
       "author": {
         "name": "Kir-STR"
