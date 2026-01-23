@@ -18,3 +18,5 @@ Or use the shorter alias:
 ## Arguments
 
 - `prd_file_path` (required): Path to Product Requirements Document (markdown file)
+
+If not provided as a command argument, the supervisor will prompt you to provide the path.
