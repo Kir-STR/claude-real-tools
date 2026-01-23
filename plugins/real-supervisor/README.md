@@ -13,7 +13,7 @@ The **Real Supervisor Plugin** provides a complete orchestration system for mana
 
 ### Skills (1)
 
-- **real-supervisor** - Orchestrates a 14-step workflow across 10 phases with state management, checkpointing, and human-in-the-loop approval gates
+- **real-supervisor** - Orchestrates a 14-step workflow across 4 phases with state management, checkpointing, and human-in-the-loop approval gates
 
 See [skills/real-supervisor/README.md](./skills/real-supervisor/README.md) for detailed skill documentation and usage guide.
 
@@ -48,20 +48,11 @@ Hook configuration: `hooks/hooks.json`
 
 ## Installation
 
-### Recommended: Via Marketplace
+### Via Marketplace (Recommended)
 
-```bash
-# Add the Real Tools marketplace
-/plugin marketplace add Kir-STR/claude-real-tools
+See the [marketplace README](../../README.md#installation) for installation via the Real Tools marketplace.
 
-# Install the Real Supervisor plugin
-/plugin install real-supervisor@real-tools
-
-# Verify installation
-/plugins
-```
-
-### Alternative: Manual Installation
+### Manual Installation
 
 #### Clone and Symlink (Development)
 
@@ -121,31 +112,21 @@ The skill will guide you through the complete workflow with approval gates and c
 
 ## Plugin Structure
 
+For the full repository structure, see the [marketplace README](../../README.md#repository-structure).
+
+This plugin is organized as:
+
 ```
 real-supervisor/
-├── .claude-plugin/
-│   └── plugin.json              # Plugin manifest
-├── agents/                      # Worker agent definitions (7 agents)
-│   ├── explore.md
-│   ├── analyst.md
-│   ├── designer.md
-│   ├── implementer.md
-│   ├── writer.md
-│   ├── critique.md
-│   └── tester.md
-├── commands/                    # Command definitions
-│   ├── supervisor.md            # /supervisor command
-│   └── rs.md                    # /rs alias command
-├── hooks/                       # Plugin hooks
-│   ├── hooks.json               # Hook configuration
-│   └── README.md                # Hook documentation
-├── skills/                      # Skill definitions
-│   └── real-supervisor/         # Real Supervisor skill
-│       ├── SKILL.md             # Skill instructions for Claude
-│       ├── examples.md          # Usage examples and patterns
-│       └── README.md            # Skill user guide
-└── README.md                    # This file
+├── .claude-plugin/plugin.json    # Plugin manifest
+├── agents/                        # 7 worker agent definitions
+├── commands/                      # /supervisor and /rs commands
+├── hooks/                         # Workflow integration hooks
+├── skills/real-supervisor/        # Orchestration skill
+└── README.md                      # This file
 ```
+
+See individual directories for detailed component documentation.
 
 ## Configuration
 

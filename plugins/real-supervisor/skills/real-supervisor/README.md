@@ -42,16 +42,17 @@ The supervisor executes a **14-step workflow** across **4 phases**:
 
 ## Worker Agents
 
-The supervisor delegates to **6 specialized agents**:
+The supervisor delegates to **7 specialized agents**:
 
-1. **Analyst** - Requirements analysis and specification generation
-2. **Designer** - UI/UX designs, architecture diagrams, system design
-3. **Implementer** - Code implementation and technical development
-4. **Writer** - Documentation, technical writing, content creation
-5. **Critique** - Critical review and constructive feedback
-6. **Tester** - Testing strategies, test cases, quality assurance
+1. **Explore** - PRD analysis and requirements extraction (built-in Claude Code agent)
+2. **Analyst** - Requirements analysis and specification generation
+3. **Designer** - UI/UX designs, architecture diagrams, system design
+4. **Implementer** - Code implementation and technical development
+5. **Writer** - Documentation, technical writing, content creation
+6. **Critique** - Critical review and constructive feedback
+7. **Tester** - Testing strategies, test cases, quality assurance
 
-The supervisor selects the appropriate agent based on deliverable type.
+The supervisor selects the appropriate agent based on deliverable type and task description.
 
 ## Workflow Diagram
 
