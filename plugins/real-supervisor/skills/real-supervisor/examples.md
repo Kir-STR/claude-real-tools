@@ -449,33 +449,27 @@ mv .supervisor .supervisor_old_$(date +%Y%m%d_%H%M%S)
 
 ### Example PRD Structure
 
-```markdown
-# Task Management API
+For a complete PRD example, see **Example 1: Build a REST API** above.
 
-## Overview
-Build a RESTful API for managing tasks with user authentication.
+A well-structured PRD should include:
 
-## Objectives
-- Provide CRUD operations for tasks
-- Implement user authentication and authorization
-- Support task filtering and sorting
+**Required Sections:**
+1. **Title** - Clear, descriptive name for the project
+2. **Overview** - Brief description of what needs to be built (2-3 sentences)
+3. **Objectives** - Bullet list of high-level goals
+4. **Functional Requirements** - Specific features and behaviors
+5. **Deliverable** - What the supervisor should produce
 
-## Functional Requirements
-- User registration and login with JWT tokens
-- Create, read, update, delete tasks
-- Assign tasks to users
-- Filter tasks by status, priority, assignee
-- Sort tasks by due date, creation date
+**Optional Sections:**
+6. **Non-Functional Requirements** - Performance, security, scalability constraints
+7. **Technical Constraints** - Technology stack, frameworks, dependencies
+8. **Success Criteria** - How to measure completion
 
-## Non-Functional Requirements
-- RESTful architecture
-- JSON responses
-- Error handling with appropriate HTTP status codes
-- Input validation
-
-## Deliverable
-Complete API implementation with Express.js, including route handlers, middleware, and database models.
-```
+**PRD Writing Tips:**
+- Be specific: "Support 1000 concurrent users" instead of "Handle many users"
+- Be complete: Include all requirements upfront to avoid mid-workflow clarifications
+- Provide context: Explain *why* something is needed, not just *what*
+- Include examples: Show sample inputs/outputs or API responses if helpful
 
 ### Example state.json Structure
 
