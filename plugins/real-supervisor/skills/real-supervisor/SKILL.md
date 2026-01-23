@@ -408,8 +408,10 @@ If any agent fails or returns an error:
 1. Log the error in session_log.json with `status: "failed"`
 2. Do NOT advance to the next step
 3. Inform the user of the failure
-4. Ask if they want to: retry the step, modify inputs, or cancel
-5. Save state with the current step marked for retry
+4. Track retry attempts in state (add `retry_count` if retrying same step)
+5. Ask if they want to: retry the step (up to 3 attempts), modify inputs, or cancel
+   - If retry_count >= 3, inform user retry limit reached and offer only: modify inputs or cancel
+6. Save state with the current step marked for retry (reset retry_count if user chooses modify inputs)
 
 ## Scope Limitations
 
