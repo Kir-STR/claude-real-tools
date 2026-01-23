@@ -154,7 +154,7 @@ Hooks are configured in `hooks/hooks.json`. The plugin uses three hooks:
 - **SessionStart**: Triggered on Claude Code startup, checks for interrupted supervisor sessions
 - **PostToolUse**: Triggered after tool usage, validates state file integrity
 
-See `hooks/README.md` for detailed hook documentation.
+Hook configuration: `hooks/hooks.json`
 
 ## Output Files
 
@@ -180,7 +180,7 @@ The skill creates all outputs in `.supervisor/`:
 - **Plugin README** (this file) - Plugin components and installation
 - **Skill Guide** - [skills/real-supervisor/README.md](./skills/real-supervisor/README.md)
 - **Usage Examples** - [skills/real-supervisor/examples.md](./skills/real-supervisor/examples.md)
-- **Hook Documentation** - [hooks/README.md](./hooks/README.md)
+- **Hook Configuration** - [hooks/hooks.json](./hooks/hooks.json)
 
 ## Edge Cases
 
