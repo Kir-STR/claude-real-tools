@@ -413,6 +413,21 @@ If any agent fails or returns an error:
    - If retry_count >= 3, inform user retry limit reached and offer only: modify inputs or cancel
 6. Save state with the current step marked for retry (reset retry_count if user chooses modify inputs)
 
+## Output Validation
+
+After each step that produces a file, validate the output:
+
+1. **File exists** - Check that the expected file path exists
+2. **File not empty** - Check that file size > 0 bytes
+3. **Basic format check**:
+   - `.md` files: Must contain at least one header (line starting with `#`)
+   - `.json` files: Must be valid JSON (parseable)
+   - Code files: Must contain at least 5 lines of non-whitespace content
+
+If validation fails:
+- Log error in session_log.json with `status: "validation_failed"`
+- Follow Error Handling procedure above (retry/modify inputs/cancel)
+
 ## Scope Limitations
 
 You must AVOID work not directly required by the PRD:
