@@ -1,6 +1,8 @@
-# Supervisor Usage Examples
+# Dev Skill Usage Examples
 
-This document provides practical examples of using the Supervisor skill for various project types.
+> **Let's `/real-tools:dev` this!**
+
+This document provides practical examples of using the Dev skill for various project types.
 
 ## Example 1: Build a REST API
 
@@ -41,7 +43,7 @@ Complete API implementation with Express.js, including route handlers, middlewar
 ### Invocation
 
 ```bash
-/real-tools:supervisor api_requirements.md
+/real-tools:dev api_requirements.md
 ```
 
 ### Workflow
@@ -122,11 +124,11 @@ Architecture documentation with:
 ### Invocation
 
 ```bash
-/supervisor architecture_prd.md
+/real-tools:dev architecture_prd.md
 ```
 
 ### Key Difference
-The supervisor automatically selects the **Designer** agent (instead of Implementer) because the deliverable is architecture documentation with diagrams.
+The dev orchestrator automatically selects the **Designer** agent (instead of Implementer) because the deliverable is architecture documentation with diagrams.
 
 ### Expected Output
 
@@ -182,11 +184,11 @@ Complete markdown documentation ready for GitHub wiki.
 ### Invocation
 
 ```bash
-/supervisor docs_requirements.md
+/real-tools:dev docs_requirements.md
 ```
 
 ### Key Difference
-The supervisor selects the **Writer** agent for documentation deliverables.
+The dev orchestrator selects the **Writer** agent for documentation deliverables.
 
 ### Expected Output
 
@@ -212,15 +214,15 @@ Your session was interrupted during draft creation. You want to resume.
 
 1. **Re-run the same command:**
    ```bash
-   /supervisor api_requirements.md
+   /real-tools:dev api_requirements.md
    ```
 
-2. **Supervisor detects existing state:**
+2. **Dev orchestrator detects existing state:**
    - Reads `.supervisor/state.json`
    - Finds `completed_steps: [1, 2, 3, 4, 5, 6, 7, 8, 9]`
    - Last completed: Step 9 (checkpoint)
 
-3. **Supervisor prompts:**
+3. **Dev orchestrator prompts:**
    ```
    Previous session detected for 'api_requirements.md'
    Last completed: Step 9 (Checkpoint Initial)
@@ -231,7 +233,7 @@ Your session was interrupted during draft creation. You want to resume.
    ```
 
 4. **You select "Yes":**
-   - Supervisor loads all artifact paths from state
+   - Dev orchestrator loads all artifact paths from state
    - Continues from Step 10
    - Invokes Implementer agent with existing task_spec.md
 
@@ -256,14 +258,14 @@ You've completed the draft but want to go back and modify the specification befo
 
 4. **State reverts to Step 9:**
    - All files from Step 10+ are archived
-   - Supervisor resumes from Step 9
+   - Dev orchestrator resumes from Step 9
    - You can now modify task_spec.md or even go back further
 
-5. **Re-run supervisor:**
+5. **Re-run dev command:**
    ```bash
-   /real-tools:supervisor api_requirements.md
+   /real-tools:dev api_requirements.md
    ```
-   Supervisor continues from Step 10 with modified context.
+   Dev orchestrator continues from Step 10 with modified context.
 
 ---
 
@@ -320,7 +322,7 @@ During plan approval (Step 7), you realize the approach is wrong.
 1. **HIL Gate 1 presents the plan**
 
 2. **You select "Cancel":**
-   - Supervisor updates state with cancellation status
+   - Dev orchestrator updates state with cancellation status
    - Session stops
    - All artifacts remain in `.supervisor/output/` for reference
 
@@ -328,7 +330,7 @@ During plan approval (Step 7), you realize the approach is wrong.
 
 4. **Start fresh:**
    ```bash
-   /real-tools:supervisor updated_requirements.md
+   /real-tools:dev updated_requirements.md
    ```
 
 ---
@@ -369,7 +371,7 @@ Complete feature with backend routes and React components, ready to integrate.
 ### Invocation
 
 ```bash
-/real-tools:supervisor feature_requirements.md
+/real-tools:dev feature_requirements.md
 ```
 
 ### Workflow Notes
@@ -458,7 +460,7 @@ A well-structured PRD should include:
 2. **Overview** - Brief description of what needs to be built (2-3 sentences)
 3. **Objectives** - Bullet list of high-level goals
 4. **Functional Requirements** - Specific features and behaviors
-5. **Deliverable** - What the supervisor should produce
+5. **Deliverable** - What the dev skill should produce
 
 **Optional Sections:**
 6. **Non-Functional Requirements** - Performance, security, scalability constraints

@@ -6,7 +6,7 @@
         "hooks": [
           {
             "type": "prompt",
-            "prompt": "Log the subagent outputs to the supervisor session log for audit trail purposes"
+            "prompt": "Log the subagent outputs to the dev session log for audit trail purposes"
           }
         ]
       }
@@ -17,7 +17,7 @@
         "hooks": [
           {
             "type": "prompt",
-            "prompt": "When a new session starts with the Real Tools plugin active, check if there are any interrupted supervisor sessions that can be resumed"
+            "prompt": "When a new session starts with the Real Tools plugin active, check if there are any interrupted dev sessions that can be resumed"
           }
         ]
       }

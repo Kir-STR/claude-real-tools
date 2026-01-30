@@ -1,9 +1,11 @@
 # Real Tools Plugin
 
+> **Let's `/real-tools:dev` this!**
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/Kir-STR/real-tools-marketplace/releases)
 
-A Claude Code plugin that orchestrates complex, multi-step projects through structured, resumable workflows with specialized worker agents.
+Build websites, components, and applications through structured, resumable workflows with specialized worker agents.
 
 ## Overview
 
@@ -13,9 +15,9 @@ The **Real Tools Plugin** provides a complete orchestration system for managing 
 
 ### Skills (1)
 
-- **supervisor** - Orchestrates a 14-step workflow across 4 phases with state management, checkpointing, and human-in-the-loop approval gates
+- **dev** - Orchestrates a 14-step workflow across 4 phases with state management, checkpointing, and human-in-the-loop approval gates
 
-See [skills/supervisor/README.md](./skills/supervisor/README.md) for detailed skill documentation and usage guide.
+See [skills/dev/README.md](./skills/dev/README.md) for detailed skill documentation and usage guide.
 
 ### Agents (6)
 
@@ -32,14 +34,14 @@ Claude Code automatically selects the appropriate agent based on task characteri
 
 **Note:** The skill also utilizes Claude Code's built-in `Explore` and `Plan` agents for codebase exploration and planning tasks.
 
-### Commands (2)
+### Commands (1)
 
-- **`/real-tools:supervisor <prd_path>`** - Full command name to invoke the supervisor skill
+- **`/real-tools:dev <prd_path>`** - Invoke the dev skill to build your project
 
 ### Hooks (3)
 
 - **SubagentStop** - Logs agent outputs to session log for audit trail
-- **SessionStart** - Checks for interrupted sessions on startup and offers resumption
+- **SessionStart** - Checks for interrupted dev sessions on startup and offers resumption
 - **PostToolUse** - Validates `.supervisor/` directory and file integrity
 
 Hook configuration: `hooks/hooks.json`
@@ -91,16 +93,16 @@ Copy-Item -Recurse real-tools-marketplace\plugins\real-tools "$env:APPDATA\claud
 
 ## Quick Start
 
-The Supervisor skill orchestrates project execution from PRD to final deliverable. For detailed usage, workflow phases, and examples, see the [skill documentation](./skills/supervisor/README.md).
+The Dev skill orchestrates project execution from PRD to final deliverable. For detailed usage, workflow phases, and examples, see the [skill documentation](./skills/dev/README.md).
 
 ### Basic Usage
 
 ```bash
 # Create a PRD (Product Requirements Document)
-# See skills/supervisor/README.md for PRD structure
+# See skills/dev/README.md for PRD structure
 
-# Invoke the supervisor
-/real-tools:supervisor path/to/your_prd.md
+# Let's dev this!
+/real-tools:dev path/to/your_prd.md
 ```
 
 The skill will guide you through the complete workflow with approval gates and checkpoints.
@@ -112,12 +114,12 @@ For the full repository structure, see the [marketplace README](../../README.md#
 This plugin is organized as:
 
 ```
-supervisor/
+real-tools/
 ├── .claude-plugin/plugin.json    # Plugin manifest
-├── agents/                        # 7 worker agent definitions
-├── commands/                      # /supervisor command
+├── agents/                        # 6 worker agent definitions
+├── commands/                      # /real-tools:dev command
 ├── hooks/                         # Workflow integration hooks
-├── skills/supervisor/        # Orchestration skill
+├── skills/dev/                    # Orchestration skill
 └── README.md                      # This file
 ```
 
@@ -145,7 +147,7 @@ You can add custom agents by creating new files in the `agents/` directory follo
 Hooks are configured in `hooks/hooks.json`. The plugin uses three hooks:
 
 - **SubagentStop**: Triggered when any subagent completes, logs output to `.supervisor/session_log.json`
-- **SessionStart**: Triggered on Claude Code startup, checks for interrupted supervisor sessions
+- **SessionStart**: Triggered on Claude Code startup, checks for interrupted dev sessions
 - **PostToolUse**: Triggered after tool usage, validates state file integrity
 
 Hook configuration: `hooks/hooks.json`
@@ -172,8 +174,8 @@ The skill creates all outputs in `.supervisor/`:
 ## Documentation
 
 - **Plugin README** (this file) - Plugin components and installation
-- **Skill Guide** - [skills/supervisor/README.md](./skills/supervisor/README.md)
-- **Usage Examples** - [skills/supervisor/examples.md](./skills/supervisor/examples.md)
+- **Skill Guide** - [skills/dev/README.md](./skills/dev/README.md)
+- **Usage Examples** - [skills/dev/examples.md](./skills/dev/examples.md)
 - **Hook Configuration** - [hooks/hooks.json](./hooks/hooks.json)
 
 ## Edge Cases
@@ -181,7 +183,7 @@ The skill creates all outputs in `.supervisor/`:
 ### PRD Modified Between Sessions
 
 If you modify the PRD file after starting a session:
-- The supervisor will use the original PRD path from state.json
+- The dev orchestrator will use the original PRD path from state.json
 - To use the modified PRD, either:
   - Start a fresh session (decline resumption)
   - Or manually update `prd_path` in state.json before resuming
@@ -196,7 +198,7 @@ If `.supervisor/state.json` is corrupted or invalid:
 ### Output Files Manually Deleted
 
 If you delete files from `.supervisor/output/`:
-- The supervisor will detect missing files during resumption
+- The dev orchestrator will detect missing files during resumption
 - You will be prompted to either:
   - Restart from the step that produces the missing file
   - Or start a fresh session
@@ -215,49 +217,7 @@ To work on multiple projects in the same directory:
 
 If interrupted while waiting for user input:
 - Re-run the command
-- The supervisor will resume at the same HIL gate
-- You will be prompted again for approval/feedback
-
-## Edge Cases
-
-### PRD Modified Between Sessions
-
-If you modify the PRD file after starting a session:
-- The supervisor will use the original PRD path from state.json
-- To use the modified PRD, either:
-  - Start a fresh session (decline resumption)
-  - Or manually update `prd_path` in state.json before resuming
-
-### State File Corrupted
-
-If `.supervisor/state.json` is corrupted or invalid:
-- Delete `.supervisor/state.json`
-- Re-run the command to start fresh
-- Previous outputs in `.supervisor/output/` will be preserved
-
-### Output Files Manually Deleted
-
-If you delete files from `.supervisor/output/`:
-- The supervisor will detect missing files during resumption
-- You will be prompted to either:
-  - Restart from the step that produces the missing file
-  - Or start a fresh session
-
-### Multiple PRDs in Same Directory
-
-To work on multiple projects in the same directory:
-- Complete or cancel the current session first
-- Archive `.supervisor/` directory:
-  ```bash
-  mv .supervisor .supervisor_project1
-  ```
-- Start new session for the second PRD
-
-### Session Interrupted During HIL Gate
-
-If interrupted while waiting for user input:
-- Re-run the command
-- The supervisor will resume at the same HIL gate
+- The dev orchestrator will resume at the same HIL gate
 - You will be prompted again for approval/feedback
 
 ## Troubleshooting
@@ -270,7 +230,7 @@ If interrupted while waiting for user input:
 
 ### Commands Not Working
 
-Ensure the plugin is properly installed and loaded (`/plugins` should list `supervisor`).
+Ensure the plugin is properly installed and loaded (`/plugins` should list `real-tools`).
 
 ### Hook Issues
 
@@ -279,7 +239,7 @@ If hooks aren't working:
 2. Verify hook paths are correct relative to plugin directory
 3. Restart Claude Code after modifying hooks
 
-For skill-specific issues (workflow, state, agents), see [skills/supervisor/README.md](./skills/supervisor/README.md).
+For skill-specific issues (workflow, state, agents), see [skills/dev/README.md](./skills/dev/README.md).
 
 ## Version
 
@@ -294,7 +254,7 @@ MIT License - see [LICENSE](../../LICENSE) file for details.
 For issues, questions, or feature requests:
 - Open an issue on [GitHub](https://github.com/Kir-STR/real-tools-marketplace/issues)
 - Check existing issues for solutions
-- Review skill documentation: [skills/supervisor/README.md](./skills/supervisor/README.md)
+- Review skill documentation: [skills/dev/README.md](./skills/dev/README.md)
 
 ## Author
 
@@ -306,7 +266,7 @@ Marketplace: `real-tools-marketplace`
 ---
 
 **Quick Reference:**
-- Install: `/plugin marketplace add Kir-STR/real-tools-marketplace` → `/plugin install supervisor@real-tools`
-- Usage: `/real-tools:supervisor path/to/prd.md` or `/supervisor path/to/prd.md`
-- Skill docs: [skills/supervisor/README.md](./skills/supervisor/README.md)
-- Examples: [skills/supervisor/examples.md](./skills/supervisor/examples.md)
+- Install: `/plugin marketplace add Kir-STR/real-tools-marketplace` → `/plugin install real-tools`
+- Usage: `/real-tools:dev path/to/prd.md`
+- Skill docs: [skills/dev/README.md](./skills/dev/README.md)
+- Examples: [skills/dev/examples.md](./skills/dev/examples.md)

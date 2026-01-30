@@ -1,16 +1,18 @@
-# Supervisor Skill
+# Dev Skill
 
-The Supervisor orchestrates complex, multi-step projects through a structured, resumable workflow with specialized worker agents.
+> **Let's `/real-tools:dev` this!**
+
+Build websites, components, and applications through a structured, resumable workflow with specialized worker agents.
 
 ## Overview
 
-The supervisor implements a **supervisor-worker pattern** where:
-- **Supervisor** manages the workflow, coordinates agents, and handles state
+The dev skill implements a **orchestrator-worker pattern** where:
+- **Dev Orchestrator** manages the workflow, coordinates agents, and handles state
 - **Workers** are specialized agents that perform specific tasks
 
 ## Workflow
 
-The supervisor executes a **14-step workflow** across **4 phases** with two human-in-the-loop (HIL) approval gates:
+The dev skill executes a **14-step workflow** across **4 phases** with two human-in-the-loop (HIL) approval gates:
 
 ### Phase 1: Initialization
 Check for existing session and initialize or resume workflow.
@@ -28,7 +30,7 @@ Create final deliverable incorporating feedback and archive session.
 
 ## Worker Agents
 
-The supervisor delegates tasks to **6 custom agents** plus built-in Claude Code agents:
+The dev orchestrator delegates tasks to **6 custom agents** plus built-in Claude Code agents:
 
 **Custom Agents:**
 - **Analyst** - Requirements analysis and specification generation
@@ -42,13 +44,13 @@ The supervisor delegates tasks to **6 custom agents** plus built-in Claude Code 
 - **Explore** - PRD analysis and requirements extraction
 - **Plan** - Planning and task breakdown
 
-The supervisor selects the appropriate agent based on deliverable type and task description.
+The dev orchestrator selects the appropriate agent based on deliverable type and task description.
 
 ## Workflow Diagram
 
 ```
 ┌──────────────────────────────────────────────┐
-│  USER: /real-tools:supervisor path/to/prd.md                    │
+│  USER: /real-tools:dev path/to/prd.md              │
 └────────────────────┬─────────────────────────┘
                      ▼
 ┌──────────────────────────────────────────────┐
@@ -151,10 +153,10 @@ The file extension (`.js`, `.py`, `.md`, etc.) is determined by the deliverable 
 If a session is interrupted, simply re-run the command:
 
 ```bash
-/real-tools:supervisor path/to/prd.md
+/real-tools:dev path/to/prd.md
 ```
 
-The supervisor:
+The dev orchestrator:
 1. Detects existing `state.json`
 2. Reads the last completed step
 3. Asks if you want to resume or start fresh
@@ -214,7 +216,7 @@ If the default schema doesn't fit your needs, you can provide a custom schema:
 
 1. Create your own `custom_schema.md`
 2. Reference it in your PRD under a "Specification Schema" section
-3. The supervisor will use your custom schema instead
+3. The dev orchestrator will use your custom schema instead
 
 ### Providing Early Feedback
 
@@ -253,12 +255,12 @@ For complex projects:
 ls path/to/prd.md
 
 # Use absolute path if needed
-/real-tools:supervisor /full/path/to/prd.md
+/real-tools:dev /full/path/to/prd.md
 ```
 
 ### Issue: Agent fails during execution
 
-**Solution**: The supervisor will log the error and ask if you want to retry, modify inputs, or cancel. Check the session log for details:
+**Solution**: The dev orchestrator will log the error and ask if you want to retry, modify inputs, or cancel. Check the session log for details:
 
 ```bash
 # View session log
@@ -277,7 +279,7 @@ ls .supervisor/state.json
 
 # If corrupted, delete and start fresh
 rm -rf .supervisor/
-/real-tools:supervisor path/to/prd.md
+/real-tools:dev path/to/prd.md
 ```
 
 ### Issue: Final deliverable doesn't match expectations
@@ -295,7 +297,7 @@ rm -rf .supervisor/
 
 ### Issue: Workflow stuck at approval gate
 
-**Solution**: The supervisor is waiting for your input. Respond to the approval prompt to continue.
+**Solution**: The dev orchestrator is waiting for your input. Respond to the approval prompt to continue.
 
 ### Issue: State file shows wrong step
 
@@ -315,7 +317,7 @@ rm -rf .supervisor/
 
 ## Limitations
 
-The supervisor explicitly avoids work not required by the PRD:
+The dev skill explicitly avoids work not required by the PRD:
 - Won't create extensive documentation beyond specifications unless requested
 - Won't perform complex analytics unless specified in PRD
 - Won't create deployment pipelines or CI/CD unless included in deliverable requirements
@@ -325,20 +327,20 @@ The supervisor explicitly avoids work not required by the PRD:
 
 ## Components
 
-The Supervisor skill consists of:
+The Dev skill consists of:
 
-- **SKILL.md** - Core supervisor instructions for Claude Code
+- **SKILL.md** - Core orchestrator instructions for Claude Code
 - **examples.md** - Usage examples, common patterns, and structure examples
 - **README.md** - This file (skill documentation for users)
 
-Worker agents are defined in `../../agents/` directory (7 specialized agents).
+Worker agents are defined in `../../agents/` directory (6 specialized agents).
 
 ## Architecture
 
-The supervisor implements these principles:
+The dev skill implements these principles:
 
 1. **File-Based Operations** - All inputs/outputs are files for transparency and version control
-2. **Supervisor Pattern** - Decompose complex tasks, delegate to specialists, aggregate results
+2. **Orchestrator Pattern** - Decompose complex tasks, delegate to specialists, aggregate results
 3. **Spec-Driven Communication** - Structured schemas ensure reliable agent handoffs
 4. **State Persistence** - Robust state management enables resumption after interruptions
 5. **Human-in-the-Loop** - User approval at critical decision points (plan approval, draft review)
@@ -354,4 +356,4 @@ The supervisor implements these principles:
 
 Skill version: 1.0.0
 
-Part of Supervisor Plugin v1.0.0
+Part of Real Tools Plugin v1.0.0
